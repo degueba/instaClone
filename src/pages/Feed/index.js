@@ -9,6 +9,10 @@ import { Post, Header, Avatar, PostImage, Description, Name, Loading } from './s
 // Components
 import LazyImage from '../../components/LazyImage';
 
+import feedApiExample from '../../../feed.json'; 
+
+
+
 export default function Feed(){
     const [feed, setFeed] = useState([]);
     const [page, setPage] = useState(1);
@@ -23,15 +27,17 @@ export default function Feed(){
 
         setLoading(true);
 
-        const response = await fetch(
-            //`http://localhost:3000/feed?_expand=author&_limit5&_page=${pageNumber}`
-            `http://demo4618891.mockable.io/feed&page=1` // just for production 
-        );
+        /* uncomment this block when you run server.json when json-server npm package
+            const response = await fetch(
+                `http://localhost:3000/feed?_expand=author&_limit5&_page=${pageNumber}` 
+            );
+            const data = await response.json();
+            const totalItems = response.headers.get('X-Total-Count');
+            
+            setTotal(Math.floor(totalItems / 5)); // se retornar numero quebrado arredonda pra cima
+        */
 
-        const data = await response.json();
-        const totalItems = response.headers.get('X-Total-Count');
-        
-        setTotal(Math.floor(totalItems / 5)); // se retornar numero quebrado arredonda pra cima
+        const data = feedApiExample;         
         setFeed(shouldRefresh ? data : [...feed, ...data]); // increment feed + data
         setPage(pageNumber + 1);
         setLoading(false);
