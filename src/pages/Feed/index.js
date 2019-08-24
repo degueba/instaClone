@@ -24,7 +24,8 @@ export default function Feed(){
         setLoading(true);
 
         const response = await fetch(
-            `http://localhost:3000/feed?_expand=author&_limit5&_page=${pageNumber}`
+            //`http://localhost:3000/feed?_expand=author&_limit5&_page=${pageNumber}`
+            `http://demo4618891.mockable.io/feed&page=1` // just for production 
         );
 
         const data = await response.json();
